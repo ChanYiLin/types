@@ -51,6 +51,9 @@ service ProxyEngineService {
     rpc SPDKBackingImageList(google.protobuf.Empty) returns (SPDKBackingImageListResponse);
     rpc SPDKBackingImageWatch(google.protobuf.Empty) returns (stream google.protobuf.Empty) {}
 
+    rpc SPDKBackingImageBackupCreate(SPDKBackingImageBackupCreateRequest) returns (google.protobuf.Empty) {}
+    rpc SPDKBackingImageBackupStatus(SPDKBackingImageBackupStatusRequest) returns (SPDKBackingImageBackupStatusResponse) {}
+
     rpc MetricsGet(ProxyEngineRequest) returns (EngineMetricsGetProxyResponse);
     rpc RemountReadOnlyVolume(RemountVolumeRequest) returns (google.protobuf.Empty);
 }
@@ -356,4 +359,29 @@ message SPDKBackingImageResponse {
 
 message SPDKBackingImageListResponse {
     map<string, SPDKBackingImageResponse> backing_images = 1;
+}
+
+message SPDKBackingImageBackupCreateRequest{
+    string backup_name = 1;
+    string name = 2;
+    string uuid = 3;
+    string lvs_uuid = 4;
+    string checksum = 5;
+    string backup_target = 6;
+    repeated string labels = 7;
+    map<string, string> credential = 8;
+    string compression_method = 9;
+    int32 concurrent_limit = 10;
+    map<string, string> parameters = 11;
+}
+
+message SPDKBackingImageBackupStatusRequest{
+    string backup_name = 1;
+}
+
+message SPDKBackingImageBackupStatusResponse {
+    int32 progress = 1;
+    string backup_url = 2;
+    string error = 3;
+    string state = 4;
 }

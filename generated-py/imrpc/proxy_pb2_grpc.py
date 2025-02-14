@@ -190,6 +190,16 @@ class ProxyEngineServiceStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.SPDKBackingImageBackupCreate = channel.unary_unary(
+                '/imrpc.ProxyEngineService/SPDKBackingImageBackupCreate',
+                request_serializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupCreateRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.SPDKBackingImageBackupStatus = channel.unary_unary(
+                '/imrpc.ProxyEngineService/SPDKBackingImageBackupStatus',
+                request_serializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusRequest.SerializeToString,
+                response_deserializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusResponse.FromString,
+                )
         self.MetricsGet = channel.unary_unary(
                 '/imrpc.ProxyEngineService/MetricsGet',
                 request_serializer=imrpc_dot_proxy__pb2.ProxyEngineRequest.SerializeToString,
@@ -416,6 +426,18 @@ class ProxyEngineServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SPDKBackingImageBackupCreate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SPDKBackingImageBackupStatus(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def MetricsGet(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -605,6 +627,16 @@ def add_ProxyEngineServiceServicer_to_server(servicer, server):
                     servicer.SPDKBackingImageWatch,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'SPDKBackingImageBackupCreate': grpc.unary_unary_rpc_method_handler(
+                    servicer.SPDKBackingImageBackupCreate,
+                    request_deserializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupCreateRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'SPDKBackingImageBackupStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.SPDKBackingImageBackupStatus,
+                    request_deserializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusRequest.FromString,
+                    response_serializer=imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusResponse.SerializeToString,
             ),
             'MetricsGet': grpc.unary_unary_rpc_method_handler(
                     servicer.MetricsGet,
@@ -1218,6 +1250,40 @@ class ProxyEngineService(object):
         return grpc.experimental.unary_stream(request, target, '/imrpc.ProxyEngineService/SPDKBackingImageWatch',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SPDKBackingImageBackupCreate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/imrpc.ProxyEngineService/SPDKBackingImageBackupCreate',
+            imrpc_dot_proxy__pb2.SPDKBackingImageBackupCreateRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SPDKBackingImageBackupStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/imrpc.ProxyEngineService/SPDKBackingImageBackupStatus',
+            imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusRequest.SerializeToString,
+            imrpc_dot_proxy__pb2.SPDKBackingImageBackupStatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

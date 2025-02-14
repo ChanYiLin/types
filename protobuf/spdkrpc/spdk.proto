@@ -60,6 +60,9 @@ service SPDKService {
     rpc BackingImageExpose(BackingImageGetRequest) returns (BackingImageExposeResponse) {}
     rpc BackingImageUnexpose(BackingImageGetRequest) returns (google.protobuf.Empty) {}
 
+    rpc BackingImageBackupCreate(BackingImageBackupCreateRequest) returns (google.protobuf.Empty) {}
+    rpc BackingImageBackupStatus(BackingImageBackupStatusRequest) returns (BackingImageBackupStatusResponse) {}
+
     rpc DiskCreate(DiskCreateRequest) returns (Disk);
     rpc DiskDelete(DiskDeleteRequest) returns (google.protobuf.Empty);
     rpc DiskGet(DiskGetRequest) returns (Disk);
@@ -456,6 +459,31 @@ message BackingImageListResponse {
 
 message BackingImageExposeResponse {
     string exposed_snapshot_lvol_address = 1;
+}
+
+message BackingImageBackupCreateRequest{
+    string backup_name = 1;
+    string name = 2;
+    string uuid = 3;
+    string lvs_uuid = 4;
+    string checksum = 5;
+    string backup_target = 6;
+    repeated string labels = 7;
+    map<string, string> credential = 8;
+    string compression_method = 9;
+    int32 concurrent_limit = 10;
+    map<string, string> parameters = 11;
+}
+
+message BackingImageBackupStatusRequest{
+    string backup_name = 1;
+}
+
+message BackingImageBackupStatusResponse {
+    int32 progress = 1;
+    string backup_url = 2;
+    string error = 3;
+    string state = 4;
 }
 
 message Disk {
